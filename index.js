@@ -5,7 +5,8 @@
 const util = require('hexo-util');
 const fs = require('hexo-fs');
 const fetch = require("node-fetch");
-const url = require("url")
+const url = require("url");
+const full_url_for = require('hexo-util').full_url_for.bind(hexo);
 
 // triggered after hexo generate.
 // this output the newPost.json into public/.
@@ -19,8 +20,8 @@ hexo.on('generateAfter', async function (post) {
         'date_published': newPost.date.format('L'),
         'summary': util.stripHTML(newPost.excerpt),
         'url': newPost.permalink,
-        'icon': util.full_url_for('/assets/images/favicon.ico'),
-        'badge': util.full_url_for('/assets/images/favicon.ico'),
+        'icon': full_url_for('/assets/images/favicon.ico'),
+        'badge': full_url_for('/assets/images/favicon.ico'),
         'tags': newPost.tags.data.map(function (v) { return v.name }),
         'categories': newPost.categories.data.map(function (v) { return v.name })
     }
